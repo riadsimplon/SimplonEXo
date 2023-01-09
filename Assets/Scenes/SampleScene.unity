@@ -436,7 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnedOject: {fileID: 1720252650393147612, guid: f5ffe40b6f88eb840a2a6ac5b3600b92,
     type: 3}
-  _numberObject: 0
+  _limitObject: 10
 --- !u!4 &1114577701
 Transform:
   m_ObjectHideFlags: 0
