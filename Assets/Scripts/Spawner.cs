@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Cube_Controller : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
-
     [SerializeField] private Transform _modelToSpawned;
+    [SerializeField] private float _radius;
     [SerializeField] private int _limitObject;
     private int _numberObject;
     private Transform _firstListObject;
@@ -17,7 +16,7 @@ public class Cube_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
 
 
 
@@ -28,26 +27,31 @@ public class Cube_Controller : MonoBehaviour
     {
 
 
-        if (Input.GetMouseButtonDown(0) && _numberObject < _limitObject)
+        if (_numberObject < _limitObject)
         {
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 25));
+            Vector3 worldPosition = Random.insideUnitCircle * _radius;
             _spawnedObject = Instantiate(_modelToSpawned, worldPosition, Quaternion.identity);
             _myGameObject.Add(_spawnedObject);
             _numberObject++;
         }
 
-        else if (Input.GetMouseButtonDown(0) && _numberObject == _limitObject)
+        else if (_numberObject == _limitObject)
         {
             _firstListObject = _myGameObject[0];
             Vector3 newWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 25));
             _firstListObject.position = newWorldPosition;
             _myGameObject.RemoveAt(0);
             _myGameObject.Add(_firstListObject);
-            
-            
-            
+
+
+
+
+
 
 
         }
+
     }
-}
+
+
+

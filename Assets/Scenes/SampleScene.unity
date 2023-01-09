@@ -434,7 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6814d4d09f5e1d743baab9e2cf32d108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnedOject: {fileID: 1720252650393147612, guid: f5ffe40b6f88eb840a2a6ac5b3600b92,
+  _modelToSpawned: {fileID: 1720252650393147612, guid: f5ffe40b6f88eb840a2a6ac5b3600b92,
     type: 3}
   _limitObject: 10
 --- !u!4 &1114577701
