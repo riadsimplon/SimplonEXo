@@ -6,7 +6,8 @@ using UnityEngine;
 public class Cube_Controller : MonoBehaviour
 {
 
-    [SerializeField] private Transform _spawnedOject;
+    [SerializeField] private Transform _objectToSpawn;
+    [SerializeField] private float distanceToCam = 10f;
     [SerializeField] private int _limitObject;
     private int _numberObject;
     private Transform _firstListObject;
@@ -29,23 +30,35 @@ public class Cube_Controller : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && _numberObject < _limitObject)
         {
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 25));
-            Instantiate(_spawnedOject, worldPosition, Quaternion.identity);
-            _myGameObject.Add(_spawnedOject);
+            // Récupérer les coords x,y de la souris sur l'écran
+            Vector2 mousePosition = Input.mousePosition;
+
+            // Transformer le point de l'écran en un point du monde 3d
+            Vector3 mouseVec = new Vector3(mousePosition.x, mousePosition.y, distanceToCam);
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mouseVec);
+
+            // On récupère l'objet qu'on fait apparaitre
+            Transform spawnedObject = Instantiate(_objectToSpawn, worldPosition, Quaternion.identity);
+            // On l'ajoute à la pool
+            _myGameObject.Add(spawnedObject);
+
+            // On augmente le compteur d'objet
             _numberObject++;
         }
 
-        else if (Input.GetMouseButtonDown(0) && _numberObject == _limitObject)
+        else if (Input.GetMouseButtonDown(0))
         {
+            // Quand on a atteint la limite d'objet
+            // On récupère le premier objet de la liste
             _firstListObject = _myGameObject[0];
-            Vector3 newWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 25));
+
+            // On le déplace à la nouvelle position du clic
+            Vector3 newWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, distanceToCam));
             _firstListObject.position = newWorldPosition;
-            _myGameObject.Add(_spawnedOject);
+
+            // On met à jour la liste
             _myGameObject.RemoveAt(0);
-            
-            
-
-
+            _myGameObject.Add(_firstListObject);
         }
     }
 }
