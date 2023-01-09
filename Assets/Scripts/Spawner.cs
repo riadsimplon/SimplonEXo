@@ -66,7 +66,7 @@ public class Spawner : MonoBehaviour
         transformToSetup.position = worldPosition;
         
         // Changer la couleur de l'objet    
-        _firstListObject.GetComponent<Renderer>().material.color = Random.ColorHSV();
+        transformToSetup.GetComponent<Renderer>().material.color = Random.ColorHSV();
 
     }
 
